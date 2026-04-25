@@ -3,154 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mang Bule Surf Lessons | Pelabuhan Ratu</title>
+    <title>Mang Bule Surf Lessons</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        .rounded-apple { border-radius: 2rem; }
-        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        :root { --glass: rgba(255, 255, 255, 0.7); }
+        body { font-family: 'Inter', sans-serif; background-color: #fbfbfd; color: #1d1d1f; scroll-behavior: smooth; }
+        .glass { background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .rounded-apple { border-radius: 24px; }
+        .btn-primary { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-primary:hover { transform: scale(1.02); }
+        /* Fix for language toggle active state */
+        .lang-active { background-color: #1d1d1f !important; color: white !important; }
     </style>
 </head>
 <body class="antialiased">
 
-    <nav class="fixed top-4 left-0 right-0 z-50 px-6">
-        <div class="max-w-5xl mx-auto glass rounded-full px-6 py-3 flex justify-between items-center shadow-sm">
-            <div class="text-xl font-extrabold tracking-tighter">MANG BULE</div>
-            <div class="hidden md:flex gap-8 text-sm font-medium">
-                <a href="#about" class="hover:text-blue-600 transition">About</a>
-                <a href="#packages" class="hover:text-blue-600 transition">Packages</a>
-                <a href="#reviews" class="hover:text-blue-600 transition">Reviews</a>
-            </div>
-            <div class="flex items-center gap-4 text-xs font-bold">
-                <button class="px-3 py-1 bg-slate-900 text-white rounded-full">ID</button>
-                <button class="px-3 py-1 bg-slate-200 rounded-full opacity-50">EN</button>
+    <nav class="fixed top-5 left-0 right-0 z-50 px-4">
+        <div class="max-w-4xl mx-auto glass rounded-full px-6 py-3 flex justify-between items-center shadow-lg">
+            <div class="text-lg font-extrabold tracking-tight">MANG BULE</div>
+            <div class="flex items-center gap-2">
+                <button id="lang-id" onclick="changeLang('id')" class="px-3 py-1 text-xs font-bold rounded-full bg-slate-100 lang-active">ID</button>
+                <button id="lang-en" onclick="changeLang('en')" class="px-3 py-1 text-xs font-bold rounded-full bg-slate-100">EN</button>
             </div>
         </div>
     </nav>
 
-    <section class="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden">
-        <div class="absolute inset-0 bg-slate-200 z-0">
-            <div class="w-full h-full bg-gradient-to-b from-blue-50 to-slate-50 flex items-center justify-center text-slate-300">
-                [Hero Background High-Res/Video]
-            </div>
-        </div>
-        <div class="relative z-10 max-w-4xl">
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">Catch your first wave in Pelabuhan Ratu.</h1>
-            <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">Belajar surfing dengan coach berpengalaman 5 tahun. Aman, seru, dan bergaransi foto kece.</p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#packages" class="px-8 py-4 bg-slate-900 text-white rounded-full font-bold shadow-xl hover:bg-blue-600 transition-all">Lihat Paket</a>
-                <a href="#about" class="px-8 py-4 glass rounded-full font-bold shadow-sm hover:bg-white transition-all">Mengenal Mang Bule</a>
+    <section class="min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-3xl text-center">
+            <h1 id="hero-title" class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]">
+                Tangkap Ombak Pertama Kamu.
+            </h1>
+            <p id="hero-desc" class="text-xl text-slate-500 mb-10 leading-relaxed max-w-xl mx-auto">
+                Belajar selancar di Pelabuhan Ratu bersama coach berpengalaman 5 tahun. Aman, seru, dan bergaransi dokumentasi kece.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#packages" id="btn-view-pkg" class="px-10 py-4 bg-[#1d1d1f] text-white rounded-full font-bold btn-primary shadow-xl">Lihat Paket</a>
+                <a href="#about" id="btn-about" class="px-10 py-4 glass rounded-full font-bold shadow-sm hover:bg-white transition-all">Tentang Kami</a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="aspect-square bg-slate-200 rounded-apple overflow-hidden flex items-center justify-center text-slate-400 text-sm">
-                [Foto 1:1 Mang Bule & Tamu]
+    <section id="about" class="py-24 px-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="aspect-square bg-slate-200 rounded-apple flex items-center justify-center text-slate-400">
+                [Foto Mang Bule 1:1]
             </div>
             <div>
-                <span class="text-blue-600 font-bold tracking-widest text-sm uppercase">Experienced Coach</span>
-                <h2 class="text-4xl font-extrabold mt-4 mb-6 leading-tight">5 Tahun Melatih Ribuan Tamu Lokal & Internasional.</h2>
-                <p class="text-slate-600 mb-8 leading-relaxed">Mang Bule menawarkan pengalaman surfing yang personal dan aman di berbagai spot terbaik Pelabuhan Ratu. Apapun level kamu, kami punya spot yang cocok.</p>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="p-6 glass rounded-apple">
-                        <h4 class="font-bold text-lg mb-1">Beginner</h4>
-                        <p class="text-xs text-slate-500">Sunset, Karang Haji, Cikembang</p>
+                <h2 id="about-title" class="text-4xl font-extrabold mb-6 tracking-tight">5 Tahun Pengalaman Melatih.</h2>
+                <p id="about-desc" class="text-slate-600 mb-8 text-lg leading-relaxed">
+                    Mang Bule telah melatih ribuan tamu lokal dan internasional. Kami tahu persis di mana ombak terbaik untuk pemula maupun yang sudah mahir.
+                </p>
+                <div class="space-y-4">
+                    <div class="p-4 glass rounded-apple">
+                        <h4 class="font-bold">Beginner Spots</h4>
+                        <p class="text-sm text-slate-500">Sunset, Karang Haji, Cikembang</p>
                     </div>
-                    <div class="p-6 glass rounded-apple">
-                        <h4 class="font-bold text-lg mb-1">Intermediate</h4>
-                        <p class="text-xs text-slate-500">Cimaja, Sawarna, & More</p>
+                    <div class="p-4 glass rounded-apple">
+                        <h4 class="font-bold">Intermediate Spots</h4>
+                        <p class="text-sm text-slate-500">Cimaja, Sawarna, Sunset, Karang Haji</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="packages" class="py-24 px-6 bg-slate-100">
-        <div class="max-w-6xl mx-auto text-center mb-16">
-            <h2 class="text-4xl font-extrabold tracking-tight">Pilih Sesi Kamu</h2>
-            <p class="text-slate-500 mt-4 italic text-sm">Semua paket coaching sudah termasuk Dokumentasi</p>
-        </div>
-
-        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-            <div class="glass p-8 rounded-apple card-hover flex flex-col">
-                <h3 class="text-xl font-bold mb-2 text-slate-500">1 Session</h3>
-                <div class="text-4xl font-extrabold mb-6">400k <span class="text-sm font-medium">/orang</span></div>
-                <ul class="text-sm space-y-3 mb-8 flex-grow">
-                    <li class="flex items-center">✓ Coaching & Guiding</li>
-                    <li class="flex items-center">✓ Dokumentasi Keren</li>
-                    <li class="flex items-center">✓ Alat Surfing Lengkap</li>
-                </ul>
-                <button onclick="bookWA('1 Session (400k)')" class="w-full py-4 bg-slate-900 text-white rounded-full font-bold">Booking Sekarang</button>
+    <section id="packages" class="py-24 px-6 bg-[#f5f5f7]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 id="pkg-title" class="text-4xl font-extrabold tracking-tight">Paket Coaching</h2>
+                <p id="pkg-subtitle" class="text-slate-500 mt-2 font-medium">Sudah termasuk Guiding & Dokumentasi</p>
             </div>
 
-            <div class="bg-white p-8 rounded-apple shadow-2xl card-hover border-2 border-blue-500 flex flex-col relative scale-105">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest">Best Value</div>
-                <h3 class="text-xl font-bold mb-2 text-blue-600">2 Sessions</h3>
-                <div class="text-4xl font-extrabold mb-6">700k <span class="text-sm font-medium">/orang</span></div>
-                <ul class="text-sm space-y-3 mb-8 flex-grow">
-                    <li class="flex items-center font-bold text-slate-900">✓ Lebih Hemat 100rb</li>
-                    <li class="flex items-center">✓ Progres Lebih Terasa</li>
-                    <li class="flex items-center">✓ Dokumentasi Lebih Banyak</li>
-                </ul>
-                <button onclick="bookWA('2 Sessions (700k)')" class="w-full py-4 bg-blue-600 text-white rounded-full font-bold shadow-lg shadow-blue-200">Pilih Paket Ini</button>
-            </div>
-
-            <div class="glass p-8 rounded-apple card-hover flex flex-col">
-                <h3 class="text-xl font-bold mb-2 text-slate-500">Group Session</h3>
-                <div class="text-4xl font-extrabold mb-6 text-slate-900">350k <span class="text-sm font-medium">/pax</span></div>
-                <ul class="text-sm space-y-3 mb-8 flex-grow">
-                    <li class="flex items-center">✓ Minimal 3 Orang</li>
-                    <li class="flex items-center">✓ Seru bareng temen</li>
-                    <li class="flex items-center">✓ Coaching & Dokumentasi</li>
-                </ul>
-                <button onclick="bookWA('Group Session (350k/pax)')" class="w-full py-4 bg-slate-900 text-white rounded-full font-bold">Booking Group</button>
-            </div>
-        </div>
-
-        <div class="max-w-4xl mx-auto mt-20 p-8 glass rounded-apple flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="text-center md:text-left">
-                <h3 class="text-2xl font-extrabold">Hanya Butuh Dokumentasi?</h3>
-                <p class="text-sm text-slate-500">Cukup bayar fotografer untuk sesi surfing kamu.</p>
-            </div>
-            <div class="grid grid-cols-2 gap-4 w-full md:w-auto">
-                <div class="text-center bg-white/50 p-4 rounded-3xl">
-                    <div class="text-lg font-black text-slate-900">200k</div>
-                    <div class="text-[10px] uppercase font-bold text-slate-400">1 Session</div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-apple shadow-sm flex flex-col items-center text-center">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">1 Session</h3>
+                    <div class="text-4xl font-extrabold mb-8">400k</div>
+                    <button onclick="bookWA('1 Session (400k)')" class="w-full py-4 bg-[#f5f5f7] hover:bg-slate-200 rounded-full font-bold transition">Booking</button>
                 </div>
-                <div class="text-center bg-white/50 p-4 rounded-3xl">
-                    <div class="text-lg font-black text-slate-900">300k</div>
-                    <div class="text-[10px] uppercase font-bold text-slate-400">2 Sessions</div>
+                <div class="bg-white p-8 rounded-apple shadow-2xl flex flex-col items-center text-center border-2 border-blue-500 relative transform scale-105">
+                    <span class="absolute -top-3 bg-blue-500 text-white px-4 py-1 rounded-full text-[10px] font-black uppercase">Populer</span>
+                    <h3 class="text-sm font-bold text-blue-500 uppercase tracking-widest mb-4">2 Sessions</h3>
+                    <div class="text-4xl font-extrabold mb-8">700k</div>
+                    <button onclick="bookWA('2 Sessions (700k)')" class="w-full py-4 bg-blue-500 text-white rounded-full font-bold shadow-lg shadow-blue-200 transition">Booking</button>
+                </div>
+                <div class="bg-white p-8 rounded-apple shadow-sm flex flex-col items-center text-center">
+                    <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Group (Min 3)</h3>
+                    <div class="text-4xl font-extrabold mb-2">350k</div>
+                    <p class="text-[10px] font-bold text-slate-400 mb-6 uppercase">Per Person / Session</p>
+                    <button onclick="bookWA('Group Session (350k/pax)')" class="w-full py-4 bg-[#f5f5f7] hover:bg-slate-200 rounded-full font-bold transition">Booking</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-16 px-6 max-w-4xl mx-auto text-center">
-        <div class="p-8 border-2 border-dashed border-slate-200 rounded-apple">
-            <h4 class="font-bold text-slate-900 mb-4">Informasi Penting</h4>
-            <div class="flex flex-col md:flex-row justify-center gap-8 text-sm text-slate-600 font-medium">
-                <div class="flex items-center gap-2"><span>🛡️</span> DP minimal Rp50.000 / sesi</div>
-                <div class="flex items-center gap-2"><span>🌊</span> Cuaca buruk? Bisa Reschedule</div>
-                <div class="flex items-center gap-2"><span>📸</span> Softcopy dokumen dikirim via Drive</div>
+    <section class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="glass p-10 rounded-apple text-center">
+            <h3 id="doc-title" class="text-2xl font-extrabold mb-8 tracking-tight">Hanya Dokumentasi?</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase mb-1">1 Session</p>
+                    <p class="text-2xl font-black">200k/pax</p>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase mb-1">2 Sessions</p>
+                    <p class="text-2xl font-black">300k/pax</p>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase mb-1">Group (Min 3)</p>
+                    <p class="text-2xl font-black">100k/pax</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 px-6 text-center border-t border-slate-100">
-        <p class="text-xs font-bold tracking-widest text-slate-400 uppercase">&copy; 2026 Mang Bule Surf Lessons. Pelabuhan Ratu, Indonesia.</p>
-    </footer>
+    <section class="pb-24 px-6 max-w-4xl mx-auto">
+        <div class="text-center p-8 bg-slate-100 rounded-apple border border-slate-200">
+            <p id="info-text" class="text-sm font-medium text-slate-600">
+                DP minimal 50k per sesi. Jika cuaca buruk, jadwal bisa di-reschedule secara gratis.
+            </p>
+        </div>
+    </section>
 
     <script>
-        function bookWA(packageName) {
-            const phoneNumber = "6285210124544";
-            const message = `Halo Mang Bule, saya tertarik booking paket *${packageName}*. Apakah slot masih tersedia?`;
-            const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(waUrl, '_blank');
+        const content = {
+            id: {
+                "hero-title": "Tangkap Ombak Pertama Kamu.",
+                "hero-desc": "Belajar selancar di Pelabuhan Ratu bersama coach berpengalaman 5 tahun. Aman, seru, dan bergaransi dokumentasi kece.",
+                "btn-view-pkg": "Lihat Paket",
+                "btn-about": "Tentang Kami",
+                "about-title": "5 Tahun Pengalaman Melatih.",
+                "about-desc": "Mang Bule telah melatih ribuan tamu lokal dan internasional. Kami tahu persis di mana ombak terbaik untuk pemula maupun yang sudah mahir.",
+                "pkg-title": "Paket Coaching",
+                "pkg-subtitle": "Sudah termasuk Guiding & Dokumentasi",
+                "doc-title": "Hanya Dokumentasi?",
+                "info-text": "DP minimal 50k per sesi. Jika cuaca buruk, jadwal bisa di-reschedule secara gratis."
+            },
+            en: {
+                "hero-title": "Catch Your First Wave.",
+                "hero-desc": "Learn to surf in Pelabuhan Ratu with a coach of 5 years experience. Safe, fun, and high-quality documentation guaranteed.",
+                "btn-view-pkg": "View Packages",
+                "btn-about": "About Us",
+                "about-title": "5 Years of Coaching Experience.",
+                "about-desc": "Mang Bule has coached thousands of local and international guests. We know exactly the best spots for beginners and advanced surfers.",
+                "pkg-title": "Coaching Packages",
+                "pkg-subtitle": "Includes Guiding & Documentation",
+                "doc-title": "Documentation Only?",
+                "info-text": "Minimum DP 50k per session. In case of bad weather, sessions can be rescheduled for free."
+            }
+        };
+
+        function changeLang(lang) {
+            // Update Text
+            for (let id in content[lang]) {
+                const element = document.getElementById(id);
+                if (element) element.innerText = content[lang][id];
+            }
+            
+            // Update Toggle Button UI
+            document.getElementById('lang-id').classList.remove('lang-active');
+            document.getElementById('lang-en').classList.remove('lang-active');
+            document.getElementById('lang-' + lang).classList.add('lang-active');
+        }
+
+        function bookWA(pkg) {
+            const num = "6285210124544";
+            const text = encodeURIComponent(`Halo Mang Bule, saya mau booking: *${pkg}*. Apakah slot masih tersedia?`);
+            window.open(`https://wa.me/${num}?text=${text}`, '_blank');
         }
     </script>
 </body>
