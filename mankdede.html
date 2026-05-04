@@ -6,6 +6,7 @@
     <title>Mank Dede Surf Lesson</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
@@ -17,13 +18,16 @@
 </head>
 <body class="text-slate-800 antialiased relative">
 
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 glass transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold tracking-tight">Mank Dede<span class="text-blue-500">.</span></h1>
             <div class="flex items-center gap-4">
+                <!-- Lang Toggle -->
                 <button id="langToggle" class="text-sm font-semibold text-slate-500 hover:text-slate-800 transition">
                     ID / <span class="text-slate-300">EN</span>
                 </button>
+                <!-- Cart Icon -->
                 <button id="cartBtn" class="relative p-2 rounded-full hover:bg-slate-200 transition">
                     <i class="fa-solid fa-bag-shopping text-xl"></i>
                     <span id="cartBadge" class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center opacity-0 transition-opacity">0</span>
@@ -32,6 +36,7 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <header class="pt-32 pb-16 px-4 max-w-6xl mx-auto text-center">
         <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4" id="heroTitle">Professional Surf Experience</h2>
         <p class="text-slate-500 max-w-2xl mx-auto text-lg mb-8" id="heroDesc">
@@ -39,29 +44,36 @@
         </p>
     </header>
 
+    <!-- Products Grid -->
     <main class="max-w-6xl mx-auto px-4 pb-20">
+        <!-- Categories will be injected by JS -->
         <div id="productContainer" class="space-y-16"></div>
     </main>
 
+    <!-- Social Proof (Reviews) -->
     <section class="py-16 bg-white overflow-hidden mb-8">
         <div class="max-w-6xl mx-auto px-4 mb-8">
             <h3 class="text-2xl font-bold" id="reviewTitle">Apa Kata Mereka</h3>
         </div>
         <div class="flex gap-6 overflow-x-auto px-4 hide-scroll" id="reviewContainer">
-            </div>
+            <!-- Reviews injected by JS -->
+        </div>
     </section>
 
+    <!-- Footer -->
     <footer class="text-center py-8 text-slate-400 text-sm">
         <p>&copy; 2026 Mank Dede Surf Lesson. All rights reserved.</p>
     </footer>
 
+    <!-- Cart Sidebar (Offcanvas) -->
     <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full md:w-96 glass-card border-l border-slate-200 transform translate-x-full transition-transform duration-300 z-[60] flex flex-col">
         <div class="p-6 border-b border-slate-200 flex justify-between items-center">
             <h3 class="text-xl font-bold" id="cartTitle">Keranjang</h3>
             <button id="closeCartBtn" class="text-slate-400 hover:text-slate-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div class="p-6 flex-1 overflow-y-auto space-y-4" id="cartItemsContainer">
-            </div>
+            <!-- Cart items here -->
+        </div>
         <div class="p-6 border-t border-slate-200 bg-white/50">
             <div class="flex justify-between items-center mb-4">
                 <span class="font-semibold text-slate-500" id="cartTotalText">Estimasi Total</span>
@@ -73,13 +85,18 @@
         </div>
     </div>
     
+    <!-- Cart Overlay -->
     <div id="cartOverlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300"></div>
 
+    <!-- JavaScript -->
     <script>
         // State
         let currentLang = 'id';
         let cart = [];
         const WA_NUMBER = "6285722229807";
+
+        // Base URL untuk Raw Image GitHub lu (spasi udah di-encode jadi %20)
+        const GITHUB_IMG_URL = "https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/";
 
         // Dictionary
         const dict = {
@@ -115,24 +132,24 @@
             }
         };
 
-        // Data Products
+        // Data Products with GitHub Raw Links
         const products = [
             // Surf
-            { id: 1, category: 'surf', price: 450000, img: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=500&h=500&fit=crop', titleId: 'Surf Lesson (Assistant Coach)', titleEn: 'Surf Lesson (Assistant Coach)', descId: 'Per sesi. Cocok untuk pemula.', descEn: 'Per session. Perfect for beginners.' },
-            { id: 2, category: 'surf', price: 800000, img: 'https://images.unsplash.com/photo-1515405295579-ba7b45403062?w=500&h=500&fit=crop', titleId: 'Surf Lesson with Mank Dede', titleEn: 'Surf Lesson with Mank Dede', descId: 'Per sesi. Termasuk dokumentasi & analisis.', descEn: 'Per session. Includes docs & analysis.' },
-            { id: 3, category: 'surf', price: 1600000, img: 'https://images.unsplash.com/photo-1416431168657-a6c4184348ab?w=500&h=500&fit=crop', titleId: '1-Day Surf with Mank Dede', titleEn: '1-Day Surf with Mank Dede', descId: 'Seharian. Termasuk dokumentasi & analisis.', descEn: 'One full day. Includes docs & analysis.' },
-            { id: 4, category: 'surf', price: 2000000, img: 'https://images.unsplash.com/photo-1455729552865-3658a5d3964f?w=500&h=500&fit=crop', titleId: 'Surf Trip to Noname', titleEn: 'Surf Trip to Noname', descId: '1 hari. Maksimal 4 pax.', descEn: '1 Day. Maximum 4 pax.' },
-            { id: 5, category: 'surf', price: 3500000, img: 'https://images.unsplash.com/photo-1526344966-89049886b28d?w=500&h=500&fit=crop', titleId: "Surf Trip Mank Dede's Secret Point", titleEn: "Surf Trip Mank Dede's Secret Point", descId: 'Maksimal 4 pax. Eksklusif.', descEn: 'Maximum 4 pax. Exclusive.' },
-            { id: 6, category: 'surf', price: 450000, img: 'https://images.unsplash.com/photo-1537552554764-2831c0e3eb44?w=500&h=500&fit=crop', titleId: "Surfboard Storage", titleEn: "Surfboard Storage", descId: 'Per bulan. Aman & terawat.', descEn: 'Per month. Safe & maintained.' },
+            { id: 1, category: 'surf', price: 450000, img: GITHUB_IMG_URL + 'BEGINNER%20LEVEL.jpeg', titleId: 'Surf Lesson (Assistant Coach)', titleEn: 'Surf Lesson (Assistant Coach)', descId: 'Per sesi. Cocok untuk pemula.', descEn: 'Per session. Perfect for beginners.' },
+            { id: 2, category: 'surf', price: 800000, img: GITHUB_IMG_URL + 'MANKDEDE.jpeg', titleId: 'Surf Lesson with Mank Dede', titleEn: 'Surf Lesson with Mank Dede', descId: 'Per sesi. Termasuk dokumentasi & analisis.', descEn: 'Per session. Includes docs & analysis.' },
+            { id: 3, category: 'surf', price: 1600000, img: GITHUB_IMG_URL + 'PRO%20LEVEL.jpeg', titleId: '1-Day Surf with Mank Dede', titleEn: '1-Day Surf with Mank Dede', descId: 'Seharian. Termasuk dokumentasi & analisis.', descEn: 'One full day. Includes docs & analysis.' },
+            { id: 4, category: 'surf', price: 2000000, img: GITHUB_IMG_URL + 'INTERMEDIATE%20LEVEL.jpeg', titleId: 'Surf Trip to Noname', titleEn: 'Surf Trip to Noname', descId: '1 hari. Maksimal 4 pax.', descEn: '1 Day. Maximum 4 pax.' },
+            { id: 5, category: 'surf', price: 3500000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.00.jpeg', titleId: "Surf Trip Mank Dede's Secret Point", titleEn: "Surf Trip Mank Dede's Secret Point", descId: 'Maksimal 4 pax. Eksklusif.', descEn: 'Maximum 4 pax. Exclusive.' },
+            { id: 6, category: 'surf', price: 450000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.29.40.jpeg', titleId: "Surfboard Storage", titleEn: "Surfboard Storage", descId: 'Per bulan. Aman & terawat.', descEn: 'Per month. Safe & maintained.' },
             // Doc
-            { id: 7, category: 'doc', price: 200000, img: 'https://images.unsplash.com/photo-1516331138075-f3adc1e149cd?w=500&h=500&fit=crop', titleId: 'Photographer', titleEn: 'Photographer', descId: 'Per sesi dokumentasi foto profesional.', descEn: 'Per session professional photo documentation.' },
+            { id: 7, category: 'doc', price: 200000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.51.53.jpeg', titleId: 'Photographer', titleEn: 'Photographer', descId: 'Per sesi dokumentasi foto profesional.', descEn: 'Per session professional photo documentation.' },
             // Stay
-            { id: 8, category: 'stay', price: 385000, img: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&h=500&fit=crop', titleId: 'Regular Room (Queen Bed)', titleEn: 'Regular Room (Queen Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
-            { id: 12, category: 'stay', price: 385000, img: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=500&h=500&fit=crop', titleId: 'Regular Room (2 Single Bed)', titleEn: 'Regular Room (2 Single Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
-            { id: 9, category: 'stay', price: 485000, img: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=500&h=500&fit=crop', titleId: 'Main Room (King Bed)', titleEn: 'Main Room (King Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
-            { id: 10, category: 'stay', price: 650000, img: 'https://images.unsplash.com/photo-1582719478250-c89404bb8a0e?w=500&h=500&fit=crop', titleId: 'Family/Group Room (4 Single)', titleEn: 'Family/Group Room (4 Single)', descId: 'Untuk 4 orang. AC, Sarapan, Air Panas.', descEn: 'For 4 pax. AC, Breakfast, Hot Shower.' },
+            { id: 8, category: 'stay', price: 385000, img: GITHUB_IMG_URL + 'DOUBLE%20BED.jpeg', titleId: 'Regular Room (Queen Bed)', titleEn: 'Regular Room (Queen Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
+            { id: 12, category: 'stay', price: 385000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.01%20(1).jpeg', titleId: 'Regular Room (2 Single Bed)', titleEn: 'Regular Room (2 Single Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
+            { id: 9, category: 'stay', price: 485000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.05.jpeg', titleId: 'Main Room (King Bed)', titleEn: 'Main Room (King Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
+            { id: 10, category: 'stay', price: 650000, img: GITHUB_IMG_URL + 'FAMILY%20ROOM.jpeg', titleId: 'Family/Group Room (4 Single)', titleEn: 'Family/Group Room (4 Single)', descId: 'Untuk 4 orang. AC, Sarapan, Air Panas.', descEn: 'For 4 pax. AC, Breakfast, Hot Shower.' },
             // Transport
-            { id: 11, category: 'trans', price: 2600000, img: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=500&h=500&fit=crop', titleId: 'Transport Jakarta - Cimaja (Return)', titleEn: 'Transport Jakarta - Cimaja (Return)', descId: 'Per hari. Maksimal 4 pax.', descEn: 'Per day. Maximum 4 pax.' }
+            { id: 11, category: 'trans', price: 2600000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.06.jpeg', titleId: 'Transport Jakarta - Cimaja (Return)', titleEn: 'Transport Jakarta - Cimaja (Return)', descId: 'Per hari. Maksimal 4 pax.', descEn: 'Per day. Maximum 4 pax.' }
         ];
 
         // Format Rupiah
@@ -176,10 +193,12 @@
                             const title = currentLang === 'id' ? p.titleId : p.titleEn;
                             const desc = currentLang === 'id' ? p.descId : p.descEn;
                             
+                            // Tambahan aspect-square object-cover biar rasio fotonya tetap 1:1 rapi 
+                            // walau foto aslinya beda-beda ukuran
                             return `
                             <div class="glass-card rounded-3xl overflow-hidden group hover:shadow-lg transition-all duration-300">
-                                <div class="aspect-square w-full overflow-hidden">
-                                    <img src="${p.img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="aspect-square w-full overflow-hidden bg-slate-100">
+                                    <img src="${p.img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/500?text=Image+Not+Found'">
                                 </div>
                                 <div class="p-6">
                                     <h4 class="font-bold text-lg leading-tight mb-1">${title}</h4>
@@ -236,7 +255,7 @@
                     total += item.price;
                     container.innerHTML += `
                         <div class="flex gap-4 items-center bg-white p-3 rounded-2xl shadow-sm border border-slate-50">
-                            <img src="${item.img}" class="w-16 h-16 rounded-xl object-cover">
+                            <img src="${item.img}" class="w-16 h-16 rounded-xl object-cover" onerror="this.src='https://via.placeholder.com/150'">
                             <div class="flex-1">
                                 <h5 class="text-sm font-bold leading-tight">${title}</h5>
                                 <p class="text-slate-500 text-xs mt-1">${formatRp(item.price)}</p>
