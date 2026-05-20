@@ -15,8 +15,6 @@
         .btn-primary { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .btn-primary:hover { transform: scale(1.02); }
         .lang-active { background-color: #1d1d1f !important; color: white !important; }
-        
-        /* Slider transitions */
         .slide-img { transition: opacity 1.5s ease-in-out; }
     </style>
 </head>
@@ -45,7 +43,7 @@
                 Tangkap Ombak Pertama Kamu.
             </h1>
             <p id="hero-desc" class="text-xl text-slate-200 mb-10 leading-relaxed max-w-xl mx-auto">
-                Belajar selancar di Pelabuhan Ratu bersama coach berpengalaman 5 tahun. Aman, seru, dan bergaransi dokumentasi kece.
+                Belajar selancar di Pelabuhan Ratu bersama coach berpengalaman 10 tahun. Aman, seru, dan bergaransi dokumentasi kece pakai drone.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#packages" id="btn-view-pkg" class="px-10 py-4 bg-white text-black rounded-full font-bold btn-primary shadow-xl">Lihat Paket</a>
@@ -60,9 +58,9 @@
                 <img src="foto mang dede.jpeg" alt="Mang Bule Coach" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
             </div>
             <div>
-                <h2 id="about-title" class="text-4xl font-extrabold mb-6 tracking-tight">5 Tahun Pengalaman Melatih.</h2>
+                <h2 id="about-title" class="text-4xl font-extrabold mb-6 tracking-tight">10 Tahun Pengalaman Melatih.</h2>
                 <p id="about-desc" class="text-slate-600 mb-8 text-lg leading-relaxed">
-                    Mang Bule telah melatih ribuan tamu lokal dan internasional. Kami tahu persis di mana ombak terbaik untuk pemula maupun yang sudah mahir.
+                    Mang Bule telah melatih ribuan tamu selama 10 tahun. Kami memastikan sesi 2 jam kamu aman, edukatif, dan didokumentasikan dengan drone terbaik.
                 </p>
                 <div class="space-y-4">
                     <div class="p-4 glass rounded-apple shadow-sm">
@@ -82,7 +80,7 @@
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 id="pkg-title" class="text-4xl font-extrabold tracking-tight">Paket Coaching</h2>
-                <p id="pkg-subtitle" class="text-slate-500 mt-2 font-medium">Sudah termasuk Guiding & Dokumentasi</p>
+                <p id="pkg-subtitle" class="text-slate-500 mt-2 font-medium">Durasi ± 2 Jam | Include: Coach, Papan, & Dokumentasi (Drone)</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
@@ -153,20 +151,18 @@
     </footer>
 
     <script>
-        // Variabel penanda bahasa aktif
         let currentLanguage = 'id';
 
-        // --- LOGIC GANTI BAHASA ---
         const content = {
             id: {
                 "hero-title": "Tangkap Ombak Pertama Kamu.",
-                "hero-desc": "Belajar selancar di Pelabuhan Ratu bersama coach berpengalaman 5 tahun. Aman, seru, dan bergaransi dokumentasi kece.",
+                "hero-desc": "Belajar selancar di Pelabuhan Ratu bersama coach berpengalaman 10 tahun. Aman, seru, dan bergaransi dokumentasi kece pakai drone.",
                 "btn-view-pkg": "Lihat Paket",
                 "btn-about": "Tentang Kami",
-                "about-title": "5 Tahun Pengalaman Melatih.",
-                "about-desc": "Mang Bule telah melatih ribuan tamu lokal dan internasional. Kami tahu persis di mana ombak terbaik untuk pemula maupun yang sudah mahir.",
+                "about-title": "10 Tahun Pengalaman Melatih.",
+                "about-desc": "Mang Bule telah melatih ribuan tamu selama 10 tahun. Kami memastikan sesi 2 jam kamu aman, edukatif, dan didokumentasikan dengan drone terbaik.",
                 "pkg-title": "Paket Coaching",
-                "pkg-subtitle": "Sudah termasuk Guiding & Dokumentasi",
+                "pkg-subtitle": "Durasi ± 2 Jam | Include: Coach, Papan, & Dokumentasi (Drone)",
                 "doc-title": "Hanya Dokumentasi?",
                 "info-text": "DP minimal 50k per sesi. Jika cuaca buruk, jadwal bisa di-reschedule secara gratis.",
                 "consult-title": "Masih Ragu? Konsultasi Dulu Yuk.",
@@ -175,13 +171,13 @@
             },
             en: {
                 "hero-title": "Catch Your First Wave.",
-                "hero-desc": "Learn to surf in Pelabuhan Ratu with a coach of 5 years experience. Safe, fun, and high-quality documentation guaranteed.",
+                "hero-desc": "Learn to surf in Pelabuhan Ratu with a coach of 10 years experience. Safe, fun, and high-quality drone documentation guaranteed.",
                 "btn-view-pkg": "View Packages",
                 "btn-about": "About Us",
-                "about-title": "5 Years of Coaching Experience.",
-                "about-desc": "Mang Bule has coached thousands of local and international guests. We know exactly the best spots for beginners and advanced surfers.",
+                "about-title": "10 Years of Coaching Experience.",
+                "about-desc": "Mang Bule has coached thousands of guests for 10 years. We ensure your 2-hour session is safe, educational, and captured by drone.",
                 "pkg-title": "Coaching Packages",
-                "pkg-subtitle": "Includes Guiding & Documentation",
+                "pkg-subtitle": "Duration ± 2 Hours | Include: Coach, Board, & Documentation (Drone)",
                 "doc-title": "Documentation Only?",
                 "info-text": "Minimum DP 50k per session. In case of bad weather, sessions can be rescheduled for free.",
                 "consult-title": "Still Unsure? Let's Consult First.",
@@ -191,7 +187,7 @@
         };
 
         function changeLang(lang) {
-            currentLanguage = lang; // Update state bahasa
+            currentLanguage = lang;
             for (let id in content[lang]) {
                 const element = document.getElementById(id);
                 if (element) element.innerText = content[lang][id];
@@ -201,7 +197,6 @@
             document.getElementById('lang-' + lang).classList.add('lang-active');
         }
 
-        // --- LOGIC WHATSAPP BOOKING ---
         function bookWA(pkg) {
             const num = "6285210124544";
             const message = currentLanguage === 'id' 
@@ -211,7 +206,6 @@
             window.open(`https://wa.me/${num}?text=${text}`, '_blank');
         }
 
-        // --- LOGIC WHATSAPP KONSULTASI ---
         function consultWA() {
             const num = "6285210124544";
             const message = currentLanguage === 'id'
@@ -221,11 +215,9 @@
             window.open(`https://wa.me/${num}?text=${text}`, '_blank');
         }
 
-        // --- LOGIC SLIDER BACKGROUND ---
         document.addEventListener("DOMContentLoaded", () => {
             const slides = document.querySelectorAll('.slide-img');
             let currentSlide = 0;
-
             if (slides.length > 1) {
                 setInterval(() => {
                     slides[currentSlide].classList.remove('opacity-100');
