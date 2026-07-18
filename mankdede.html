@@ -1,175 +1,292 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mank Dede Surf Lesson</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <!-- Google Fonts: Geometric Sans (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            orange: '#E64A19',
+                            yellow: '#E4E619',
+                            navy: '#1A2F3B',
+                            light: '#F5F7F8',
+                        }
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '2.5rem',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.3); }
-        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+        }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Pill-shape container & extreme rounded elements from reference audit */
+        .pill-container { border-radius: 9999px; }
+        .extreme-round { border-radius: 2.5rem; }
     </style>
 </head>
-<body class="text-slate-800 antialiased relative">
+<body class="text-slate-900 antialiased relative selection:bg-brand-orange selection:text-white">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tight">Mank Dede<span class="text-blue-500">.</span></h1>
-            <div class="flex items-center gap-4">
+    <!-- Top Accent Bar -->
+    <div class="w-full h-2 bg-brand-orange"></div>
+
+    <!-- Header Navigation -->
+    <nav class="w-full bg-white border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center text-white text-xs font-black">M</div>
+                <h1 class="text-xl font-black tracking-tighter uppercase text-brand-navy">Mank Dede<span class="text-brand-orange">.</span></h1>
+            </div>
+            
+            <div class="flex items-center gap-6">
                 <!-- Lang Toggle -->
-                <button id="langToggle" class="text-sm font-semibold text-slate-500 hover:text-slate-800 transition">
-                    ID / <span class="text-slate-300">EN</span>
+                <button id="langToggle" class="text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-brand-navy transition-colors">
+                    ID / <span class="text-brand-orange font-black">EN</span>
                 </button>
-                <!-- Cart Icon -->
-                <button id="cartBtn" class="relative p-2 rounded-full hover:bg-slate-200 transition">
-                    <i class="fa-solid fa-bag-shopping text-xl"></i>
-                    <span id="cartBadge" class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center opacity-0 transition-opacity">0</span>
+                
+                <!-- Cart Trigger Button -->
+                <button id="cartBtn" class="relative p-3 rounded-full bg-slate-100 hover:bg-brand-navy hover:text-white text-brand-navy transition-all duration-300 flex items-center justify-center">
+                    <i class="fa-solid fa-bag-shopping text-sm"></i>
+                    <span id="cartBadge" class="absolute -top-1 -right-1 bg-brand-orange text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center opacity-0 transition-opacity scale-90 border-2 border-white">0</span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="pt-32 pb-16 px-4 max-w-6xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4" id="heroTitle">Professional Surf Experience</h2>
-        <p class="text-slate-500 max-w-2xl mx-auto text-lg mb-8" id="heroDesc">
-            5 tahun pengalaman melatih peselancar pemula hingga profesional. Kami menyediakan layanan lengkap dari kelas selancar, dokumentasi, penginapan, hingga transportasi.
-        </p>
-    </header>
+    <!-- Macro Layout Container -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Hero Grid Section -->
+        <header class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20 bg-slate-50 p-6 md:p-10 extreme-round">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-orange/10 text-brand-orange text-xs font-bold tracking-wide uppercase">
+                    <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span> Authorized Surf Guide
+                </div>
+                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-none text-brand-navy uppercase" id="heroTitle">
+                    Professional Surf Experience
+                </h2>
+                <p class="text-slate-500 text-base md:text-lg max-w-xl font-medium leading-relaxed" id="heroDesc">
+                    5 years of experience coaching beginners to advanced surfers. We provide lessons, photography, stays, and transport.
+                </p>
+                <div class="pt-2">
+                    <a href="#productContainer" class="inline-flex items-center gap-3 bg-brand-orange hover:bg-brand-navy text-white font-black text-sm px-8 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider">
+                        Explore Packages <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Hero Aesthetic Visuals mimicking reference rounded cards frame -->
+            <div class="lg:col-span-5 relative w-full aspect-[4/3] sm:aspect-video lg:aspect-square bg-slate-200 extreme-round overflow-hidden group shadow-xl">
+                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/MANKDEDE.jpeg" alt="Mank Dede" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80'">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-transparent to-transparent p-8 flex flex-col justify-end">
+                    <span class="text-brand-yellow font-black text-xs uppercase tracking-widest mb-1">Head Coach</span>
+                    <h4 class="text-white text-2xl font-black uppercase tracking-tight">Mank Dede Surf</h4>
+                </div>
+            </div>
+        </header>
 
-    <!-- Products Grid -->
-    <main class="max-w-6xl mx-auto px-4 pb-20">
-        <!-- Categories will be injected by JS -->
-        <div id="productContainer" class="space-y-16"></div>
-    </main>
+        <!-- Main Workspace: Products Grid Architecture styled like Bento-blocks -->
+        <main class="mb-24">
+            <div id="productContainer" class="space-y-20">
+                <!-- Dynamically injected items structured via JS -->
+            </div>
+        </main>
 
-    <!-- Social Proof (Reviews) -->
-    <section class="py-16 bg-white overflow-hidden mb-8">
-        <div class="max-w-6xl mx-auto px-4 mb-8">
-            <h3 class="text-2xl font-bold" id="reviewTitle">Apa Kata Mereka</h3>
+        <!-- Pricing Sheet Feature Strip Block -->
+        <section class="mb-24 bg-brand-navy text-white extreme-round overflow-hidden relative shadow-2xl">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="relative grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-slate-700/50 p-8 md:p-12 gap-8 items-center">
+                <div class="space-y-3">
+                    <span class="text-brand-orange font-black text-xs uppercase tracking-widest">Pricing Policy</span>
+                    <h3 class="text-3xl font-black tracking-tight uppercase">Best Rate Guaranteed</h3>
+                    <p class="text-slate-400 text-sm font-medium">Clear pricing structures with complete package inclusions. No hidden administrative fees.</p>
+                </div>
+                <div class="lg:px-8 space-y-4">
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-brand-yellow text-brand-navy flex items-center justify-center flex-shrink-0 text-xs font-bold"><i class="fa-solid fa-check"></i></div>
+                        <p class="text-slate-300 text-sm font-medium">Full high-quality gear rentals included in all primary surf packages</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-brand-yellow text-brand-navy flex items-center justify-center flex-shrink-0 text-xs font-bold"><i class="fa-solid fa-check"></i></div>
+                        <p class="text-slate-300 text-sm font-medium">Safety assurance backed by highly skilled localized area specialists</p>
+                    </div>
+                </div>
+                <div class="lg:pl-8 flex flex-col justify-center">
+                    <div class="bg-white/5 p-6 rounded-3xl border border-white/10 text-center">
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">Need a tailored itinerary?</p>
+                        <a href="https://wa.me/6285722229807" target="_blank" class="w-full inline-block bg-brand-yellow hover:bg-white text-brand-navy font-black text-xs tracking-wider uppercase py-3.5 rounded-2xl transition-all duration-300">
+                            Consult Via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof (Horizontal Review Roll) -->
+        <section class="py-12 bg-slate-50 extreme-round px-6 md:px-10 overflow-hidden mb-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                <div>
+                    <span class="text-brand-orange font-black text-xs uppercase tracking-widest block mb-1">Guest Journal</span>
+                    <h3 class="text-3xl font-black tracking-tight text-brand-navy uppercase" id="reviewTitle">What They Say</h3>
+                </div>
+                <div class="flex gap-2">
+                    <div class="w-2 h-2 rounded-full bg-brand-orange"></div>
+                    <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-slate-300"></div>
+                </div>
+            </div>
+            
+            <div class="flex gap-6 overflow-x-auto pb-4 hide-scroll snap-x snap-mandatory" id="reviewContainer">
+                <!-- Reviews populated dynamically -->
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Clean Industrial Footer Structure -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-full bg-brand-orange text-white flex items-center justify-center font-black text-[10px]">M</div>
+                <span class="font-black tracking-wider uppercase text-white text-sm">Mank Dede Surf</span>
+            </div>
+            <p class="font-medium text-center sm:text-left">&copy; 2026 Mank Dede Surf Lesson. All rights reserved.</p>
         </div>
-        <div class="flex gap-6 overflow-x-auto px-4 hide-scroll" id="reviewContainer">
-            <!-- Reviews injected by JS -->
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-center py-8 text-slate-400 text-sm">
-        <p>&copy; 2026 Mank Dede Surf Lesson. All rights reserved.</p>
     </footer>
 
-    <!-- Cart Sidebar (Offcanvas) -->
-    <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full md:w-96 glass-card border-l border-slate-200 transform translate-x-full transition-transform duration-300 z-[60] flex flex-col">
-        <div class="p-6 border-b border-slate-200 flex justify-between items-center">
-            <h3 class="text-xl font-bold" id="cartTitle">Keranjang</h3>
-            <button id="closeCartBtn" class="text-slate-400 hover:text-slate-800 text-xl"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="p-6 flex-1 overflow-y-auto space-y-4" id="cartItemsContainer">
-            <!-- Cart items here -->
-        </div>
-        <div class="p-6 border-t border-slate-200 bg-white/50">
-            <div class="flex justify-between items-center mb-4">
-                <span class="font-semibold text-slate-500" id="cartTotalText">Estimasi Total</span>
-                <span class="font-bold text-xl" id="cartTotalRp">Rp 0</span>
+    <!-- Cart Drawer Workspace Panel (Offcanvas Layout) -->
+    <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full sm:w-[450px] bg-white shadow-2xl transform translate-x-full transition-transform duration-500 z-[60] flex flex-col border-l border-slate-100">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-brand-orange"></i>
+                <h3 class="text-lg font-black uppercase text-brand-navy tracking-tight" id="cartTitle">Your Cart</h3>
             </div>
-            <button id="checkoutBtn" class="w-full bg-slate-900 text-white font-semibold py-4 rounded-2xl hover:bg-slate-800 transition flex justify-center items-center gap-2">
-                <i class="fa-brands fa-whatsapp text-green-400 text-lg"></i> <span id="checkoutText">Checkout ke WhatsApp</span>
+            <button id="closeCartBtn" class="w-10 h-10 rounded-full bg-white hover:bg-brand-orange hover:text-white text-slate-400 transition-colors flex items-center justify-center shadow-sm border border-slate-100">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+        </div>
+        
+        <!-- Interactive Cart List Content Space -->
+        <div class="p-6 flex-1 overflow-y-auto space-y-4 bg-white" id="cartItemsContainer">
+            <!-- Items injected by JS logic -->
+        </div>
+        
+        <!-- Summary Checkout Block -->
+        <div class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
+            <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <span class="font-bold text-xs text-slate-400 uppercase tracking-wider" id="cartTotalText">Estimated Total</span>
+                <span class="font-black text-xl text-brand-navy" id="cartTotalRp">Rp 0</span>
+            </div>
+            <button id="checkoutBtn" class="w-full bg-brand-orange hover:bg-brand-navy text-white font-black text-sm tracking-wider uppercase py-4 rounded-2xl transition-all duration-300 flex justify-center items-center gap-3 shadow-lg shadow-brand-orange/10 hover:shadow-none">
+                <i class="fa-brands fa-whatsapp text-lg"></i> <span id="checkoutText">Checkout via WhatsApp</span>
             </button>
         </div>
     </div>
     
-    <!-- Cart Overlay -->
-    <div id="cartOverlay" class="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    <!-- Modally Structured Blur Screen Overlay Layer -->
+    <div id="cartOverlay" class="fixed inset-0 bg-brand-navy/40 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300"></div>
 
-    <!-- JavaScript -->
+    <!-- Automation Controller & Data Hydration Scripts -->
     <script>
-        // State
-        let currentLang = 'id';
+        // Internal Context State Configuration
+        let currentLang = 'en'; // Force English template by default for international travelers
         let cart = [];
         const WA_NUMBER = "6285722229807";
 
-        // Base URL untuk Raw Image GitHub lu (spasi udah di-encode jadi %20)
+        // Structured Assets Base Endpoint
         const GITHUB_IMG_URL = "https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/";
 
-        // Dictionary
+        // Multi-language Interface Configuration Context
         const dict = {
             id: {
                 heroTitle: "Pengalaman Selancar Profesional",
-                heroDesc: "5 tahun pengalaman melatih peselancar pemula (Pantai Sunset, Karang Haji, Cikembang) hingga profesional (Cimaja, Sawarna). Kami melayani kelas, dokumentasi, penginapan, dan transportasi.",
+                heroDesc: "5 tahun pengalaman melatih peselancar pemula (Pantai Sunset, Karang Haji, Cikembang) hingga profesional (Cimaja, Sawarna). Kami menyediakan layanan kelas lengkap, dokumentasi, penginapan, dan transportasi.",
                 reviewTitle: "Apa Kata Mereka",
-                cartTitle: "Keranjang",
+                cartTitle: "Keranjang Belanja",
                 cartTotalText: "Estimasi Total",
                 checkoutText: "Checkout ke WhatsApp",
                 catSurf: "Selancar & Trip",
-                catDoc: "Dokumentasi",
-                catStay: "Penginapan",
-                catTrans: "Transportasi",
-                btnCart: "Tambah",
-                btnCartAdded: "Di Keranjang",
-                emptyCart: "Keranjang masih kosong."
+                catDoc: "Dokumentasi Foto",
+                catStay: "Penginapan Nyaman",
+                catTrans: "Layanan Transportasi",
+                btnCart: "Pilih Paket",
+                btnCartAdded: "Terpilih",
+                emptyCart: "Keranjang pesanan kosong."
             },
             en: {
                 heroTitle: "Professional Surf Experience",
                 heroDesc: "5 years of experience coaching beginners (Sunset Beach, Karang Haji, Cikembang) to advanced surfers (Cimaja, Sawarna). We provide lessons, photography, stays, and transport.",
-                reviewTitle: "What They Say",
-                cartTitle: "Your Cart",
+                reviewTitle: "Guest Journal",
+                cartTitle: "Your Selection",
                 cartTotalText: "Estimated Total",
                 checkoutText: "Checkout via WhatsApp",
                 catSurf: "Surf Lessons & Trips",
                 catDoc: "Documentation",
                 catStay: "Accommodation",
                 catTrans: "Transportation",
-                btnCart: "Add",
-                btnCartAdded: "Added",
-                emptyCart: "Your cart is empty."
+                btnCart: "Book Package",
+                btnCartAdded: "Selected",
+                emptyCart: "Your cart is currently empty."
             }
         };
 
-        // Data Products with GitHub Raw Links
+        // Unified Product Objects Array Matrix
         const products = [
-            // Surf
             { id: 1, category: 'surf', price: 450000, img: GITHUB_IMG_URL + 'BEGINNER%20LEVEL.jpeg', titleId: 'Surf Lesson (Assistant Coach)', titleEn: 'Surf Lesson (Assistant Coach)', descId: 'Per sesi. Cocok untuk pemula.', descEn: 'Per session. Perfect for beginners.' },
             { id: 2, category: 'surf', price: 800000, img: GITHUB_IMG_URL + 'MANKDEDE.jpeg', titleId: 'Surf Lesson with Mank Dede', titleEn: 'Surf Lesson with Mank Dede', descId: 'Per sesi. Termasuk dokumentasi & analisis.', descEn: 'Per session. Includes docs & analysis.' },
             { id: 3, category: 'surf', price: 1600000, img: GITHUB_IMG_URL + 'PRO%20LEVEL.jpeg', titleId: '1-Day Surf with Mank Dede', titleEn: '1-Day Surf with Mank Dede', descId: 'Seharian. Termasuk dokumentasi & analisis.', descEn: 'One full day. Includes docs & analysis.' },
             { id: 4, category: 'surf', price: 2000000, img: GITHUB_IMG_URL + 'INTERMEDIATE%20LEVEL.jpeg', titleId: 'Surf Trip to Noname', titleEn: 'Surf Trip to Noname', descId: '1 hari. Maksimal 4 pax.', descEn: '1 Day. Maximum 4 pax.' },
             { id: 5, category: 'surf', price: 3500000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.00.jpeg', titleId: "Surf Trip Mank Dede's Secret Point", titleEn: "Surf Trip Mank Dede's Secret Point", descId: 'Maksimal 4 pax. Eksklusif.', descEn: 'Maximum 4 pax. Exclusive.' },
             { id: 6, category: 'surf', price: 450000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.29.40.jpeg', titleId: "Surfboard Storage", titleEn: "Surfboard Storage", descId: 'Per bulan. Aman & terawat.', descEn: 'Per month. Safe & maintained.' },
-            // Doc
             { id: 7, category: 'doc', price: 200000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.51.53.jpeg', titleId: 'Photographer', titleEn: 'Photographer', descId: 'Per sesi dokumentasi foto profesional.', descEn: 'Per session professional photo documentation.' },
-            // Stay
             { id: 8, category: 'stay', price: 385000, img: GITHUB_IMG_URL + 'DOUBLE%20BED.jpeg', titleId: 'Regular Room (Queen Bed)', titleEn: 'Regular Room (Queen Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
             { id: 12, category: 'stay', price: 385000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.01%20(1).jpeg', titleId: 'Regular Room (2 Single Bed)', titleEn: 'Regular Room (2 Single Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
             { id: 9, category: 'stay', price: 485000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.05.jpeg', titleId: 'Main Room (King Bed)', titleEn: 'Main Room (King Bed)', descId: 'Untuk 2 orang. AC, Sarapan, Air Panas.', descEn: 'For 2 pax. AC, Breakfast, Hot Shower.' },
             { id: 10, category: 'stay', price: 650000, img: GITHUB_IMG_URL + 'FAMILY%20ROOM.jpeg', titleId: 'Family/Group Room (4 Single)', titleEn: 'Family/Group Room (4 Single)', descId: 'Untuk 4 orang. AC, Sarapan, Air Panas.', descEn: 'For 4 pax. AC, Breakfast, Hot Shower.' },
-            // Transport
             { id: 11, category: 'trans', price: 2600000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.06.jpeg', titleId: 'Transport Jakarta - Cimaja (Return)', titleEn: 'Transport Jakarta - Cimaja (Return)', descId: 'Per hari. Maksimal 4 pax.', descEn: 'Per day. Maximum 4 pax.' }
         ];
 
-        // Format Rupiah
+        // Currency Formatter Module
         const formatRp = (num) => 'Rp ' + num.toLocaleString('id-ID');
 
-        // Render UI
+        // Main Rendering Engine Injector
         function renderUI() {
             const t = dict[currentLang];
             
-            // Static Texts
+            // Text Hydration
             ['heroTitle', 'heroDesc', 'reviewTitle', 'cartTitle', 'cartTotalText', 'checkoutText'].forEach(id => {
-                document.getElementById(id).innerText = t[id];
+                const element = document.getElementById(id);
+                if(element) element.innerText = t[id];
             });
 
-            // Update Lang Toggle Visual
+            // Lang Button Dynamic Text Styling
             document.getElementById('langToggle').innerHTML = currentLang === 'id' 
-                ? `ID / <span class="text-slate-300">EN</span>` 
-                : `<span class="text-slate-300">ID</span> / EN`;
+                ? `<span class="text-brand-orange font-black">ID</span> / EN` 
+                : `ID / <span class="text-brand-orange font-black">EN</span>`;
 
-            // Render Products Grouped
+            // Setup Catalog Sections Rendering utilizing extreme rounded frames
             const container = document.getElementById('productContainer');
             container.innerHTML = '';
             
@@ -185,27 +302,38 @@
                 if (catProducts.length === 0) return;
 
                 const section = document.createElement('div');
+                section.className = "space-y-6";
+                
+                // Structured Grid layout representing high-depth custom blocks from reference image
                 section.innerHTML = `
-                    <h3 class="text-2xl font-bold mb-6">${cat.title}</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="flex items-center gap-4">
+                        <span class="w-3 h-6 bg-brand-orange rounded-full inline-block"></span>
+                        <h3 class="text-2xl font-black tracking-tight uppercase text-brand-navy">${cat.title}</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         ${catProducts.map(p => {
                             const isAdded = cart.some(item => item.id === p.id);
                             const title = currentLang === 'id' ? p.titleId : p.titleEn;
                             const desc = currentLang === 'id' ? p.descId : p.descEn;
                             
-                            // Tambahan aspect-square object-cover biar rasio fotonya tetap 1:1 rapi 
-                            // walau foto aslinya beda-beda ukuran
                             return `
-                            <div class="glass-card rounded-3xl overflow-hidden group hover:shadow-lg transition-all duration-300">
-                                <div class="aspect-square w-full overflow-hidden bg-slate-100">
-                                    <img src="${p.img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/500?text=Image+Not+Found'">
+                            <div class="bg-white rounded-5xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                                <div class="relative aspect-square w-full overflow-hidden bg-slate-50">
+                                    <img src="${p.img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=500&q=80'">
+                                    <div class="absolute top-4 right-4">
+                                        <span class="bg-white/90 backdrop-blur-md text-brand-navy text-[11px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm border border-slate-200/50">
+                                            ${cat.title.split(' ')[0]}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="p-6">
-                                    <h4 class="font-bold text-lg leading-tight mb-1">${title}</h4>
-                                    <p class="text-slate-500 text-sm mb-4 h-10">${desc}</p>
-                                    <div class="flex justify-between items-center mt-2">
-                                        <span class="font-semibold text-slate-800">${formatRp(p.price)}</span>
-                                        <button onclick="toggleCart(${p.id})" class="px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${isAdded ? 'bg-slate-200 text-slate-800' : 'bg-slate-900 text-white hover:bg-slate-800'}">
+                                <div class="p-6 md:p-8 flex-1 flex flex-col justify-between gap-4">
+                                    <div class="space-y-1">
+                                        <h4 class="font-black text-lg text-brand-navy uppercase tracking-tight leading-tight">${title}</h4>
+                                        <p class="text-slate-400 text-xs font-medium">${desc}</p>
+                                    </div>
+                                    <div class="flex justify-between items-center pt-2 border-t border-slate-50">
+                                        <span class="font-black text-brand-navy text-base">${formatRp(p.price)}</span>
+                                        <button onclick="toggleCart(${p.id})" class="px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 ${isAdded ? 'bg-slate-100 text-brand-navy border border-slate-200' : 'bg-brand-orange text-white hover:bg-brand-navy shadow-md shadow-brand-orange/10 hover:shadow-none'}">
                                             ${isAdded ? t.btnCartAdded : t.btnCart}
                                         </button>
                                     </div>
@@ -221,7 +349,7 @@
             renderCart();
         }
 
-        // Cart Logic
+        // Cart State Mutation Handlers
         window.toggleCart = function(id) {
             const index = cart.findIndex(item => item.id === id);
             if (index > -1) {
@@ -230,7 +358,7 @@
                 const product = products.find(p => p.id === id);
                 cart.push(product);
             }
-            renderUI(); // Re-render to update buttons
+            renderUI();
         }
 
         function renderCart() {
@@ -239,28 +367,38 @@
             const container = document.getElementById('cartItemsContainer');
             const totalEl = document.getElementById('cartTotalRp');
 
-            // Badge
+            // Badge Counter Updating
             badge.innerText = cart.length;
-            badge.style.opacity = cart.length > 0 ? '1' : '0';
+            if (cart.length > 0) {
+                badge.classList.remove('opacity-0');
+                badge.classList.add('opacity-100');
+            } else {
+                badge.classList.remove('opacity-100');
+                badge.classList.add('opacity-0');
+            }
 
-            // Items
             container.innerHTML = '';
             let total = 0;
 
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-slate-500 text-center mt-10">${t.emptyCart}</p>`;
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center pt-16 text-center space-y-3">
+                        <div class="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center text-slate-300"><i class="fa-solid fa-basket-shopping text-2xl"></i></div>
+                        <p class="text-slate-400 text-xs font-medium">${t.emptyCart}</p>
+                    </div>
+                `;
             } else {
                 cart.forEach(item => {
                     const title = currentLang === 'id' ? item.titleId : item.titleEn;
                     total += item.price;
                     container.innerHTML += `
-                        <div class="flex gap-4 items-center bg-white p-3 rounded-2xl shadow-sm border border-slate-50">
-                            <img src="${item.img}" class="w-16 h-16 rounded-xl object-cover" onerror="this.src='https://via.placeholder.com/150'">
-                            <div class="flex-1">
-                                <h5 class="text-sm font-bold leading-tight">${title}</h5>
-                                <p class="text-slate-500 text-xs mt-1">${formatRp(item.price)}</p>
+                        <div class="flex gap-4 items-center bg-slate-50 p-4 rounded-3xl border border-slate-100 transition-all hover:bg-white hover:shadow-sm">
+                            <img src="${item.img}" class="w-16 h-16 rounded-2xl object-cover border border-slate-200 bg-white" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=150&q=80'">
+                            <div class="flex-1 min-w-0">
+                                <h5 class="text-sm font-black text-brand-navy uppercase tracking-tight truncate">${title}</h5>
+                                <p class="text-brand-orange text-xs font-bold mt-0.5">${formatRp(item.price)}</p>
                             </div>
-                            <button onclick="toggleCart(${item.id})" class="text-slate-400 hover:text-red-500 p-2"><i class="fa-solid fa-trash-can"></i></button>
+                            <button onclick="toggleCart(${item.id})" class="w-8 h-8 rounded-full bg-white hover:bg-red-50 text-slate-400 hover:text-red-500 transition-colors flex items-center justify-center border border-slate-100 shadow-sm"><i class="fa-solid fa-trash-can text-xs"></i></button>
                         </div>
                     `;
                 });
@@ -269,30 +407,26 @@
             totalEl.innerText = formatRp(total);
         }
 
-        // Checkout Logic
+        // Redirect Engine targeting WhatsApp Web/API Endpoint (Formatted strictly in English per rules)
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             
-            let text = currentLang === 'id' 
-                ? `Halo Mank Dede! Saya ingin memesan paket berikut dari website:\n\n`
-                : `Hello Mank Dede! I would like to book the following packages from the website:\n\n`;
+            let text = `Hello Mank Dede! I would like to book the following packages from the website:\n\n`;
             
             cart.forEach((item, i) => {
-                const title = currentLang === 'id' ? item.titleId : item.titleEn;
-                text += `${i+1}. ${title} - ${formatRp(item.price)}\n`;
+                // Ensure text output defaults cleanly to English details as per consumer base preferences
+                text += `${i+1}. ${item.titleEn} - ${formatRp(item.price)}\n`;
             });
 
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            text += `\nTotal Estimasi: ${formatRp(total)}`;
-            text += currentLang === 'id' 
-                ? `\n\nMohon informasi ketersediaan jadwalnya. Terima kasih!`
-                : `\n\nPlease let me know the schedule availability. Thank you!`;
+            text += `\nTotal Estimated: ${formatRp(total)}`;
+            text += `\n\nPlease let me know the schedule availability. Thank you!`;
 
             const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
             window.open(waLink, '_blank');
         });
 
-        // Dummy Reviews
+        // Reviews Dataset Injection
         const reviews = [
             { name: "Budi Santoso", text: "Mantap banget belajar sama Mank Dede, 2 sesi langsung bisa berdiri di papan!", rating: 5 },
             { name: "Sarah Jenkins", text: "Amazing experience! Mank Dede is very patient and the spot is perfect.", rating: 5 },
@@ -304,33 +438,38 @@
         const reviewContainer = document.getElementById('reviewContainer');
         reviews.forEach(r => {
             reviewContainer.innerHTML += `
-                <div class="glass-card min-w-[300px] md:min-w-[350px] p-6 rounded-3xl border border-slate-100 flex-shrink-0">
-                    <div class="flex text-yellow-400 text-sm mb-3">
+                <div class="bg-white min-w-[300px] md:min-w-[380px] p-6 md:p-8 rounded-4xl border border-slate-100 flex-shrink-0 snap-start shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="flex text-brand-yellow text-xs gap-1 mb-4">
                         ${'<i class="fa-solid fa-star"></i>'.repeat(r.rating)}
                     </div>
-                    <p class="text-slate-700 italic mb-4">"${r.text}"</p>
-                    <p class="font-bold text-sm text-slate-900">- ${r.name}</p>
+                    <p class="text-slate-500 font-medium italic text-sm leading-relaxed mb-4">"${r.text}"</p>
+                    <div class="flex items-center gap-2 pt-2 border-t border-slate-50">
+                        <div class="w-2 h-2 rounded-full bg-brand-orange"></div>
+                        <p class="font-black text-xs text-brand-navy uppercase tracking-wider">${r.name}</p>
+                    </div>
                 </div>
             `;
         });
 
-        // Event Listeners
+        // Language Interaction Handlers
         document.getElementById('langToggle').addEventListener('click', () => {
             currentLang = currentLang === 'id' ? 'en' : 'id';
             renderUI();
         });
 
-        // Cart Sidebar Toggle
+        // Drawer Animation Handlers
         const cartSidebar = document.getElementById('cartSidebar');
         const cartOverlay = document.getElementById('cartOverlay');
 
         function openCart() {
             cartSidebar.classList.remove('translate-x-full');
             cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            cartOverlay.classList.add('opacity-100');
         }
 
         function closeCart() {
             cartSidebar.classList.add('translate-x-full');
+            cartOverlay.classList.remove('opacity-100');
             cartOverlay.classList.add('opacity-0', 'pointer-events-none');
         }
 
@@ -338,7 +477,7 @@
         document.getElementById('closeCartBtn').addEventListener('click', closeCart);
         cartOverlay.addEventListener('click', closeCart);
 
-        // Init
+        // Core Initialization Run
         renderUI();
     </script>
 </body>
