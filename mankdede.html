@@ -42,52 +42,6 @@
         }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* 
-           =========================================================
-           INVERTED CORNER RADIUS HACK (PURE CSS & SMOOTH CURVES)
-           =========================================================
-        */
-        
-        /* Main Image Container shaping with bottom-left cut out */
-        .hero-shaped-card, .catalog-shaped-card {
-            border-radius: 2.5rem;
-            border-bottom-left-radius: 0rem; /* Mengosongkan sudut untuk tempat takik */
-        }
-
-        /* --- HERO CORNER BRIDGE SPECIFICATION (FOR BG-SLATE-50) --- */
-        .inverted-corner-top {
-            width: 2rem;
-            height: 2rem;
-            background-color: transparent;
-            border-bottom-left-radius: 1.5rem;
-            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC; /* Menyatu dengan bg-slate-50 */
-        }
-        .inverted-corner-right {
-            width: 2rem;
-            height: 2rem;
-            background-color: transparent;
-            border-bottom-left-radius: 1.5rem;
-            transform: rotate(-90deg);
-            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC; /* Menyatu dengan bg-slate-50 */
-        }
-
-        /* --- CATALOG CORNER BRIDGE SPECIFICATION (FOR BG-WHITE) --- */
-        .catalog-corner-top {
-            width: 1.5rem;
-            height: 1.5rem;
-            background-color: transparent;
-            border-bottom-left-radius: 1rem;
-            box-shadow: -0.5rem 0.5rem 0 0.5rem #FFFFFF; /* Menyatu dengan bg-white kartu produk */
-        }
-        .catalog-corner-right {
-            width: 1.5rem;
-            height: 1.5rem;
-            background-color: transparent;
-            border-bottom-left-radius: 1rem;
-            transform: rotate(-90deg);
-            box-shadow: -0.5rem 0.5rem 0 0.5rem #FFFFFF; /* Menyatu dengan bg-white kartu produk */
-        }
     </style>
 </head>
 <body class="text-slate-900 antialiased relative selection:bg-brand-orange selection:text-white">
@@ -140,9 +94,10 @@
                 </div>
             </div>
             
-            <!-- INVERTED CORNER RADIUS HERO WORKSPACE -->
+            <!-- STABLE INVERTED CORNER ARCHITECTURE - HERO WORKSPACE -->
             <div class="lg:col-span-6 relative w-full aspect-[4/3] bg-white rounded-5xl p-2 sm:p-4">
-                <div class="relative w-full h-full overflow-hidden hero-shaped-card bg-slate-200 group">
+                <!-- Image Frame with Bottom-Left Cutout Slot -->
+                <div class="relative w-full h-full overflow-hidden rounded-[2.5rem] rounded-bl-none bg-slate-200 group">
                     <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/MANKDEDE.jpeg" alt="Mank Dede" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80'">
                     
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent p-8 flex flex-col justify-end items-end">
@@ -151,14 +106,22 @@
                     </div>
                 </div>
 
+                <!-- Dynamic Notch Overlay Container (Bottom-Left) -->
                 <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 z-20 flex items-end">
+                    
+                    <!-- Top Inverted Curve Bridge (Pinned dynamically to match slate-50 background) -->
+                    <div class="absolute -top-6 left-0 w-6 h-6 pointer-events-none rounded-bl-2xl shadow-[-8px_8px_0_8px_#F8FAFC]"></div>
+
+                    <!-- The Button Slot Frame -->
                     <div class="bg-slate-50 pr-4 pt-4 rounded-tr-3xl relative">
-                        <div class="absolute bottom-full left-0 inverted-corner-top pointer-events-none z-10"></div>
                         <button onclick="toggleCart(2)" class="bg-brand-orange hover:bg-brand-navy text-white font-black text-xs md:text-sm px-6 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider flex items-center gap-3 whitespace-nowrap">
                             <i class="fa-solid fa-bolt"></i> <span>Book Quick Session</span>
                         </button>
-                        <div class="absolute bottom-0 left-full inverted-corner-right pointer-events-none z-10 origin-bottom-left"></div>
+
+                        <!-- Right Inverted Curve Bridge (Pinned to Right of Button Slot) -->
+                        <div class="absolute top-0 -right-6 w-6 h-6 pointer-events-none rounded-bl-2xl shadow-[-8px_8px_0_8px_#F8FAFC]"></div>
                     </div>
+                    
                 </div>
             </div>
         </header>
@@ -266,15 +229,11 @@
 
     <!-- Automation Controller & Data Hydration Scripts -->
     <script>
-        // Internal Context State Configuration
         let currentLang = 'en';
         let cart = [];
         const WA_NUMBER = "6285722229807";
-
-        // Structured Assets Base Endpoint
         const GITHUB_IMG_URL = "https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/";
 
-        // Multi-language Interface Configuration Context
         const dict = {
             id: {
                 heroTitle: "Pengalaman Selancar Profesional",
@@ -308,7 +267,6 @@
             }
         };
 
-        // Unified Product Objects Array Matrix
         const products = [
             { id: 1, category: 'surf', price: 450000, img: GITHUB_IMG_URL + 'BEGINNER%20LEVEL.jpeg', titleId: 'Surf Lesson (Assistant Coach)', titleEn: 'Surf Lesson (Assistant Coach)', descId: 'Per sesi. Cocok untuk pemula.', descEn: 'Per session. Perfect for beginners.' },
             { id: 2, category: 'surf', price: 800000, img: GITHUB_IMG_URL + 'MANKDEDE.jpeg', titleId: 'Surf Lesson with Mank Dede', titleEn: 'Surf Lesson with Mank Dede', descId: 'Per sesi. Termasuk dokumentasi & analisis.', descEn: 'Per session. Includes docs & analysis.' },
@@ -324,25 +282,20 @@
             { id: 11, category: 'trans', price: 2600000, img: GITHUB_IMG_URL + 'WhatsApp%20Image%202026-04-25%20at%2021.52.06.jpeg', titleId: 'Transport Jakarta - Cimaja (Return)', titleEn: 'Transport Jakarta - Cimaja (Return)', descId: 'Per hari. Maksimal 4 pax.', descEn: 'Per day. Maximum 4 pax.' }
         ];
 
-        // Currency Formatter Module
         const formatRp = (num) => 'Rp ' + num.toLocaleString('id-ID');
 
-        // Main Rendering Engine Injector
         function renderUI() {
             const t = dict[currentLang];
             
-            // Text Hydration
             ['heroTitle', 'heroDesc', 'reviewTitle', 'cartTitle', 'cartTotalText', 'checkoutText'].forEach(id => {
                 const element = document.getElementById(id);
                 if(element) element.innerText = t[id];
             });
 
-            // Lang Button Dynamic Text Styling
             document.getElementById('langToggle').innerHTML = currentLang === 'id' 
                 ? `<span class="text-brand-orange font-black">ID</span> / EN` 
                 : `ID / <span class="text-brand-orange font-black">EN</span>`;
 
-            // Setup Catalog Sections
             const container = document.getElementById('productContainer');
             container.innerHTML = '';
             
@@ -373,26 +326,14 @@
                             
                             return `
                             <div class="bg-white rounded-5xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                                
-                                <!-- IMAGE CONTROLLER WITH INVERTED CORNER SLOT INJECTION -->
                                 <div class="relative aspect-square w-full p-2 sm:p-3 bg-white">
-                                    <div class="relative w-full h-full overflow-hidden catalog-shaped-card bg-slate-50">
+                                    <div class="relative w-full h-full overflow-hidden rounded-[2rem] bg-slate-50">
                                         <img src="${p.img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=500&q=80'">
                                     </div>
-                                    
-                                    <!-- Dynamic Floating Area Injection with Harmonized White Shadow Bridges -->
-                                    <div class="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 z-10 flex items-end">
-                                        <div class="bg-white pr-3 pt-3 rounded-tr-2xl relative">
-                                            <!-- Top Inverted Curve Bridge (White Background Matching Card Layout) -->
-                                            <div class="absolute bottom-full left-0 catalog-corner-top pointer-events-none z-10"></div>
-                                            
-                                            <span class="bg-brand-navy text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider block shadow-sm whitespace-nowrap">
-                                                ${cat.title.split(' ')[0]}
-                                            </span>
-                                            
-                                            <!-- Right Inverted Curve Bridge (White Background Matching Card Layout) -->
-                                            <div class="absolute bottom-0 left-full catalog-corner-right pointer-events-none z-10 origin-bottom-left"></div>
-                                        </div>
+                                    <div class="absolute bottom-5 left-5 z-10 flex items-end">
+                                        <span class="bg-brand-navy text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider block shadow-sm whitespace-nowrap">
+                                            ${cat.title.split(' ')[0]}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -419,7 +360,6 @@
             renderCart();
         }
 
-        // Cart State Mutation Handlers
         window.toggleCart = function(id) {
             const index = cart.findIndex(item => item.id === id);
             if (index > -1) {
@@ -476,25 +416,18 @@
             totalEl.innerText = formatRp(total);
         }
 
-        // WhatsApp Redirect
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
-            
             let text = `Hello Mank Dede! I would like to book the following packages from the website:\n\n`;
-            
             cart.forEach((item, i) => {
                 text += `${i+1}. ${item.titleEn} - ${formatRp(item.price)}\n`;
             });
-
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             text += `\nTotal Estimated: ${formatRp(total)}`;
             text += `\n\nPlease let me know the schedule availability. Thank you!`;
-
-            const waLink = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(waLink, '_blank');
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
         });
 
-        // Reviews Dataset Injection
         const reviews = [
             { name: "Budi Santoso", text: "Mantap banget belajar sama Mank Dede, 2 sesi langsung bisa berdiri di papan!", rating: 5 },
             { name: "Sarah Jenkins", text: "Amazing experience! Mank Dede is very patient and the spot is perfect.", rating: 5 },
@@ -519,13 +452,11 @@
             `;
         });
 
-        // Language Interaction Handlers
         document.getElementById('langToggle').addEventListener('click', () => {
             currentLang = currentLang === 'id' ? 'en' : 'id';
             renderUI();
         });
 
-        // Drawer Animation Handlers
         const cartSidebar = document.getElementById('cartSidebar');
         const cartOverlay = document.getElementById('cartOverlay');
 
@@ -545,7 +476,6 @@
         document.getElementById('closeCartBtn').addEventListener('click', closeCart);
         cartOverlay.addEventListener('click', closeCart);
 
-        // Core Initialization Run
         renderUI();
     </script>
 </body>
