@@ -61,8 +61,8 @@
             height: 2rem;
             background-color: transparent;
             border-bottom-left-radius: 1.5rem;
-            /* Menggunakan #F8FAFC agar menyatu mulus dengan bg-slate-50 kontainer luar */
-            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC;
+            /* Menggunakan warna #F8FAFC agar menyatu dengan bg-slate-50 kontainer luar */
+            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC; 
         }
 
         /* Right Curved Notch Bridge */
@@ -71,9 +71,9 @@
             height: 2rem;
             background-color: transparent;
             border-bottom-left-radius: 1.5rem;
-            /* Diputar untuk menciptakan lekukan transisi di sebelah kanan tombol */
+            /* Diputar agar lengkungan mengarah dengan benar ke sisi samping kanan */
             transform: rotate(-90deg);
-            /* Menggunakan #F8FAFC agar menyatu mulus dengan bg-slate-50 kontainer luar */
+            /* Menggunakan warna #F8FAFC agar menyatu dengan bg-slate-50 kontainer luar */
             box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC;
         }
     </style>
@@ -109,7 +109,7 @@
     <!-- Macro Layout Container -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
-        <!-- Hero Grid Section with Replicated Inverted Corner Shaping -->
+        <!-- Hero Grid Section -->
         <header class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 bg-slate-50 p-6 md:p-10 rounded-5xl">
             <div class="lg:col-span-6 space-y-6">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-orange/10 text-brand-orange text-xs font-bold tracking-wide uppercase">
@@ -145,22 +145,26 @@
                     </div>
                 </div>
 
-                <!-- FUNCTIONS & NOTCH SHAPING OVERLAY (Bottom-Left Corner) -->
+                <!-- 
+                    FUNCTIONS & NOTCH SHAPING OVERLAY (Bottom-Left Corner) 
+                -->
+                <!-- Container Utama Floating Area -->
                 <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 z-20 flex items-end">
-                    <!-- Pembungkus Tombol dengan warna latar setara bg-slate-50 -->
+                    
+                    <!-- Pembungkus Tombol dengan warna yang pas (bg-slate-50) -->
                     <div class="bg-slate-50 pr-4 pt-4 rounded-tr-3xl relative">
                         
-                        <!-- Top Inverted Curve Bridge -->
+                        <!-- Top Inverted Curve Bridge (Menempel otomatis di bagian atas) -->
                         <div class="absolute bottom-full left-0 inverted-corner-top pointer-events-none z-10"></div>
                         
-                        <!-- Functional Button -->
                         <button onclick="toggleCart(2)" class="bg-brand-orange hover:bg-brand-navy text-white font-black text-xs md:text-sm px-6 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider flex items-center gap-3 whitespace-nowrap">
                             <i class="fa-solid fa-bolt"></i> <span>Book Quick Session</span>
                         </button>
                         
-                        <!-- Right Inverted Curve Bridge -->
+                        <!-- Right Inverted Curve Bridge (Menempel otomatis di bagian kanan mengikuti lebar teks tombol) -->
                         <div class="absolute bottom-0 left-full inverted-corner-right pointer-events-none z-10 origin-bottom-left"></div>
                     </div>
+                    
                 </div>
             </div>
         </header>
@@ -202,7 +206,7 @@
             </div>
         </section>
 
-        <!-- Social Proof (Horizontal Review Roll) -->
+        <!-- Social Proof -->
         <section class="py-12 bg-slate-50 rounded-5xl px-6 md:px-10 overflow-hidden mb-12">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
@@ -234,7 +238,7 @@
         </div>
     </footer>
 
-    <!-- Cart Drawer Workspace Panel (Offcanvas Layout) -->
+    <!-- Cart Drawer Workspace Panel -->
     <div id="cartSidebar" class="fixed inset-y-0 right-0 w-full sm:w-[450px] bg-white shadow-2xl transform translate-x-full transition-transform duration-500 z-[60] flex flex-col border-l border-slate-100">
         <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
             <div class="flex items-center gap-2">
