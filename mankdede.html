@@ -52,7 +52,7 @@
         /* Main Image Container shaping with bottom-left cut out */
         .hero-shaped-card {
             border-radius: 2.5rem;
-            border-bottom-left-radius: 0rem; /* Cut bottom-left for notch integration */
+            border-bottom-left-radius: 0rem; /* Mengosongkan sudut untuk tempat takik */
         }
 
         /* Top Curved Notch Bridge */
@@ -61,8 +61,8 @@
             height: 2rem;
             background-color: transparent;
             border-bottom-left-radius: 1.5rem;
-            /* Box shadow creates the inverse concave fill matching card background */
-            box-shadow: -0.75rem 0.75rem 0 0.75rem #FFFFFF;
+            /* Menggunakan #F8FAFC agar menyatu mulus dengan bg-slate-50 kontainer luar */
+            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC;
         }
 
         /* Right Curved Notch Bridge */
@@ -71,7 +71,10 @@
             height: 2rem;
             background-color: transparent;
             border-bottom-left-radius: 1.5rem;
-            box-shadow: -0.75rem 0.75rem 0 0.75rem #FFFFFF;
+            /* Diputar untuk menciptakan lekukan transisi di sebelah kanan tombol */
+            transform: rotate(-90deg);
+            /* Menggunakan #F8FAFC agar menyatu mulus dengan bg-slate-50 kontainer luar */
+            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC;
         }
     </style>
 </head>
@@ -126,9 +129,9 @@
             </div>
             
             <!-- 
-               =========================================================
-               INVERTED CORNER RADIUS IMPLEMENTATION WORKSPACE
-               =========================================================
+                =========================================================
+                INVERTED CORNER RADIUS IMPLEMENTATION WORKSPACE
+                =========================================================
             -->
             <div class="lg:col-span-6 relative w-full aspect-[4/3] bg-white rounded-5xl p-2 sm:p-4">
                 <!-- Main Image Card Frame with Custom Cutout -->
@@ -142,21 +145,23 @@
                     </div>
                 </div>
 
-                <!-- 
-                   FUNCTIONS & NOTCH SHAPING OVERLAY (Bottom-Left Corner) 
-                -->
-                <!-- Top Inverted Curve Bridge -->
-                <div class="absolute bottom-[4.25rem] left-2 sm:left-4 inverted-corner-top pointer-events-none z-10"></div>
-                
-                <!-- Functional Button Placed Directly Inside Inverted Cutout Slot -->
-                <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 z-20 bg-white pr-4 pt-4 rounded-tr-3xl">
-                    <button onclick="toggleCart(2)" class="bg-brand-orange hover:bg-brand-navy text-white font-black text-xs md:text-sm px-6 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider flex items-center gap-3">
-                        <i class="fa-solid fa-bolt"></i> <span>Book Quick Session</span>
-                    </button>
+                <!-- FUNCTIONS & NOTCH SHAPING OVERLAY (Bottom-Left Corner) -->
+                <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 z-20 flex items-end">
+                    <!-- Pembungkus Tombol dengan warna latar setara bg-slate-50 -->
+                    <div class="bg-slate-50 pr-4 pt-4 rounded-tr-3xl relative">
+                        
+                        <!-- Top Inverted Curve Bridge -->
+                        <div class="absolute bottom-full left-0 inverted-corner-top pointer-events-none z-10"></div>
+                        
+                        <!-- Functional Button -->
+                        <button onclick="toggleCart(2)" class="bg-brand-orange hover:bg-brand-navy text-white font-black text-xs md:text-sm px-6 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider flex items-center gap-3 whitespace-nowrap">
+                            <i class="fa-solid fa-bolt"></i> <span>Book Quick Session</span>
+                        </button>
+                        
+                        <!-- Right Inverted Curve Bridge -->
+                        <div class="absolute bottom-0 left-full inverted-corner-right pointer-events-none z-10 origin-bottom-left"></div>
+                    </div>
                 </div>
-
-                <!-- Right Inverted Curve Bridge -->
-                <div class="absolute bottom-2 sm:bottom-4 left-[15.5rem] md:left-[17.5rem] inverted-corner-right pointer-events-none z-10"></div>
             </div>
         </header>
 
