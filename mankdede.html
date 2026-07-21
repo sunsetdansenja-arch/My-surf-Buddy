@@ -50,31 +50,43 @@
         */
         
         /* Main Image Container shaping with bottom-left cut out */
-        .hero-shaped-card {
+        .hero-shaped-card, .catalog-shaped-card {
             border-radius: 2.5rem;
             border-bottom-left-radius: 0rem; /* Mengosongkan sudut untuk tempat takik */
         }
 
-        /* Top Curved Notch Bridge */
+        /* --- HERO CORNER BRIDGE SPECIFICATION (FOR BG-SLATE-50) --- */
         .inverted-corner-top {
             width: 2rem;
             height: 2rem;
             background-color: transparent;
             border-bottom-left-radius: 1.5rem;
-            /* Menggunakan warna #F8FAFC agar menyatu dengan bg-slate-50 kontainer luar */
-            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC; 
+            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC; /* Menyatu dengan bg-slate-50 */
         }
-
-        /* Right Curved Notch Bridge */
         .inverted-corner-right {
             width: 2rem;
             height: 2rem;
             background-color: transparent;
             border-bottom-left-radius: 1.5rem;
-            /* Diputar agar lengkungan mengarah dengan benar ke sisi samping kanan */
             transform: rotate(-90deg);
-            /* Menggunakan warna #F8FAFC agar menyatu dengan bg-slate-50 kontainer luar */
-            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC;
+            box-shadow: -0.75rem 0.75rem 0 0.75rem #F8FAFC; /* Menyatu dengan bg-slate-50 */
+        }
+
+        /* --- CATALOG CORNER BRIDGE SPECIFICATION (FOR BG-WHITE) --- */
+        .catalog-corner-top {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: transparent;
+            border-bottom-left-radius: 1rem;
+            box-shadow: -0.5rem 0.5rem 0 0.5rem #FFFFFF; /* Menyatu dengan bg-white kartu produk */
+        }
+        .catalog-corner-right {
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: transparent;
+            border-bottom-left-radius: 1rem;
+            transform: rotate(-90deg);
+            box-shadow: -0.5rem 0.5rem 0 0.5rem #FFFFFF; /* Menyatu dengan bg-white kartu produk */
         }
     </style>
 </head>
@@ -128,43 +140,25 @@
                 </div>
             </div>
             
-            <!-- 
-                =========================================================
-                INVERTED CORNER RADIUS IMPLEMENTATION WORKSPACE
-                =========================================================
-            -->
+            <!-- INVERTED CORNER RADIUS HERO WORKSPACE -->
             <div class="lg:col-span-6 relative w-full aspect-[4/3] bg-white rounded-5xl p-2 sm:p-4">
-                <!-- Main Image Card Frame with Custom Cutout -->
                 <div class="relative w-full h-full overflow-hidden hero-shaped-card bg-slate-200 group">
                     <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/MANKDEDE.jpeg" alt="Mank Dede" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80'">
                     
-                    <!-- Overlay Gradient Text inside Image -->
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent p-8 flex flex-col justify-end items-end">
                         <span class="text-brand-yellow font-black text-xs uppercase tracking-widest mb-1">Cimaja, West Java</span>
                         <h4 class="text-white text-xl font-black uppercase tracking-tight">Mank Dede Secret Point</h4>
                     </div>
                 </div>
 
-                <!-- 
-                    FUNCTIONS & NOTCH SHAPING OVERLAY (Bottom-Left Corner) 
-                -->
-                <!-- Container Utama Floating Area -->
                 <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 z-20 flex items-end">
-                    
-                    <!-- Pembungkus Tombol dengan warna yang pas (bg-slate-50) -->
                     <div class="bg-slate-50 pr-4 pt-4 rounded-tr-3xl relative">
-                        
-                        <!-- Top Inverted Curve Bridge (Menempel otomatis di bagian atas) -->
                         <div class="absolute bottom-full left-0 inverted-corner-top pointer-events-none z-10"></div>
-                        
                         <button onclick="toggleCart(2)" class="bg-brand-orange hover:bg-brand-navy text-white font-black text-xs md:text-sm px-6 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider flex items-center gap-3 whitespace-nowrap">
                             <i class="fa-solid fa-bolt"></i> <span>Book Quick Session</span>
                         </button>
-                        
-                        <!-- Right Inverted Curve Bridge (Menempel otomatis di bagian kanan mengikuti lebar teks tombol) -->
                         <div class="absolute bottom-0 left-full inverted-corner-right pointer-events-none z-10 origin-bottom-left"></div>
                     </div>
-                    
                 </div>
             </div>
         </header>
@@ -379,14 +373,29 @@
                             
                             return `
                             <div class="bg-white rounded-5xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                                <div class="relative aspect-square w-full overflow-hidden bg-slate-50">
-                                    <img src="${p.img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=500&q=80'">
-                                    <div class="absolute top-4 right-4">
-                                        <span class="bg-white/90 backdrop-blur-md text-brand-navy text-[11px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm border border-slate-200/50">
-                                            ${cat.title.split(' ')[0]}
-                                        </span>
+                                
+                                <!-- IMAGE CONTROLLER WITH INVERTED CORNER SLOT INJECTION -->
+                                <div class="relative aspect-square w-full p-2 sm:p-3 bg-white">
+                                    <div class="relative w-full h-full overflow-hidden catalog-shaped-card bg-slate-50">
+                                        <img src="${p.img}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=500&q=80'">
+                                    </div>
+                                    
+                                    <!-- Dynamic Floating Area Injection with Harmonized White Shadow Bridges -->
+                                    <div class="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 z-10 flex items-end">
+                                        <div class="bg-white pr-3 pt-3 rounded-tr-2xl relative">
+                                            <!-- Top Inverted Curve Bridge (White Background Matching Card Layout) -->
+                                            <div class="absolute bottom-full left-0 catalog-corner-top pointer-events-none z-10"></div>
+                                            
+                                            <span class="bg-brand-navy text-white text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-wider block shadow-sm whitespace-nowrap">
+                                                ${cat.title.split(' ')[0]}
+                                            </span>
+                                            
+                                            <!-- Right Inverted Curve Bridge (White Background Matching Card Layout) -->
+                                            <div class="absolute bottom-0 left-full catalog-corner-right pointer-events-none z-10 origin-bottom-left"></div>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="p-6 md:p-8 flex-1 flex flex-col justify-between gap-4">
                                     <div class="space-y-1">
                                         <h4 class="font-black text-lg text-brand-navy uppercase tracking-tight leading-tight">${title}</h4>
