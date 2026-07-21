@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mank Dede Surf Lesson</title>
+    <title>Mank Dede Surf Lesson - Inverted Corner Feature</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Geometric Sans (Inter) -->
@@ -42,9 +42,37 @@
         }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-        /* Pill-shape container & extreme rounded elements from reference audit */
-        .pill-container { border-radius: 9999px; }
-        .extreme-round { border-radius: 2.5rem; }
+        
+        /* 
+           =========================================================
+           INVERTED CORNER RADIUS HACK (PURE CSS & SMOOTH CURVES)
+           =========================================================
+        */
+        
+        /* Main Image Container shaping with bottom-left cut out */
+        .hero-shaped-card {
+            border-radius: 2.5rem;
+            border-bottom-left-radius: 0rem; /* Cut bottom-left for notch integration */
+        }
+
+        /* Top Curved Notch Bridge */
+        .inverted-corner-top {
+            width: 2rem;
+            height: 2rem;
+            background-color: transparent;
+            border-bottom-left-radius: 1.5rem;
+            /* Box shadow creates the inverse concave fill matching card background */
+            box-shadow: -0.75rem 0.75rem 0 0.75rem #FFFFFF;
+        }
+
+        /* Right Curved Notch Bridge */
+        .inverted-corner-right {
+            width: 2rem;
+            height: 2rem;
+            background-color: transparent;
+            border-bottom-left-radius: 1.5rem;
+            box-shadow: -0.75rem 0.75rem 0 0.75rem #FFFFFF;
+        }
     </style>
 </head>
 <body class="text-slate-900 antialiased relative selection:bg-brand-orange selection:text-white">
@@ -78,9 +106,9 @@
     <!-- Macro Layout Container -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
-        <!-- Hero Grid Section -->
-        <header class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-20 bg-slate-50 p-6 md:p-10 extreme-round">
-            <div class="lg:col-span-7 space-y-6">
+        <!-- Hero Grid Section with Replicated Inverted Corner Shaping -->
+        <header class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20 bg-slate-50 p-6 md:p-10 rounded-5xl">
+            <div class="lg:col-span-6 space-y-6">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-orange/10 text-brand-orange text-xs font-bold tracking-wide uppercase">
                     <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span> Authorized Surf Guide
                 </div>
@@ -91,19 +119,44 @@
                     5 years of experience coaching beginners to advanced surfers. We provide lessons, photography, stays, and transport.
                 </p>
                 <div class="pt-2">
-                    <a href="#productContainer" class="inline-flex items-center gap-3 bg-brand-orange hover:bg-brand-navy text-white font-black text-sm px-8 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider">
+                    <a href="#productContainer" class="inline-flex items-center gap-3 bg-brand-navy hover:bg-brand-orange text-white font-black text-sm px-8 py-4 rounded-full shadow-lg transition-all duration-300 uppercase tracking-wider">
                         Explore Packages <i class="fa-solid fa-arrow-down"></i>
                     </a>
                 </div>
             </div>
             
-            <!-- Hero Aesthetic Visuals mimicking reference rounded cards frame -->
-            <div class="lg:col-span-5 relative w-full aspect-[4/3] sm:aspect-video lg:aspect-square bg-slate-200 extreme-round overflow-hidden group shadow-xl">
-                <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/MANKDEDE.jpeg" alt="Mank Dede" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80'">
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/80 via-transparent to-transparent p-8 flex flex-col justify-end">
-                    <span class="text-brand-yellow font-black text-xs uppercase tracking-widest mb-1">Head Coach</span>
-                    <h4 class="text-white text-2xl font-black uppercase tracking-tight">Mank Dede Surf</h4>
+            <!-- 
+               =========================================================
+               INVERTED CORNER RADIUS IMPLEMENTATION WORKSPACE
+               =========================================================
+            -->
+            <div class="lg:col-span-6 relative w-full aspect-[4/3] bg-white rounded-5xl p-2 sm:p-4">
+                <!-- Main Image Card Frame with Custom Cutout -->
+                <div class="relative w-full h-full overflow-hidden hero-shaped-card bg-slate-200 group">
+                    <img src="https://raw.githubusercontent.com/sunsetdansenja-arch/My-surf-Buddy/main/mank%20dede%20image/MANKDEDE.jpeg" alt="Mank Dede" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80'">
+                    
+                    <!-- Overlay Gradient Text inside Image -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent p-8 flex flex-col justify-end items-end">
+                        <span class="text-brand-yellow font-black text-xs uppercase tracking-widest mb-1">Cimaja, West Java</span>
+                        <h4 class="text-white text-xl font-black uppercase tracking-tight">Mank Dede Secret Point</h4>
+                    </div>
                 </div>
+
+                <!-- 
+                   FUNCTIONS & NOTCH SHAPING OVERLAY (Bottom-Left Corner) 
+                -->
+                <!-- Top Inverted Curve Bridge -->
+                <div class="absolute bottom-[4.25rem] left-2 sm:left-4 inverted-corner-top pointer-events-none z-10"></div>
+                
+                <!-- Functional Button Placed Directly Inside Inverted Cutout Slot -->
+                <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 z-20 bg-white pr-4 pt-4 rounded-tr-3xl">
+                    <button onclick="toggleCart(2)" class="bg-brand-orange hover:bg-brand-navy text-white font-black text-xs md:text-sm px-6 py-4 rounded-full shadow-lg shadow-brand-orange/20 hover:shadow-none transition-all duration-300 uppercase tracking-wider flex items-center gap-3">
+                        <i class="fa-solid fa-bolt"></i> <span>Book Quick Session</span>
+                    </button>
+                </div>
+
+                <!-- Right Inverted Curve Bridge -->
+                <div class="absolute bottom-2 sm:bottom-4 left-[15.5rem] md:left-[17.5rem] inverted-corner-right pointer-events-none z-10"></div>
             </div>
         </header>
 
@@ -115,7 +168,7 @@
         </main>
 
         <!-- Pricing Sheet Feature Strip Block -->
-        <section class="mb-24 bg-brand-navy text-white extreme-round overflow-hidden relative shadow-2xl">
+        <section class="mb-24 bg-brand-navy text-white rounded-5xl overflow-hidden relative shadow-2xl">
             <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
             <div class="relative grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-slate-700/50 p-8 md:p-12 gap-8 items-center">
                 <div class="space-y-3">
@@ -145,7 +198,7 @@
         </section>
 
         <!-- Social Proof (Horizontal Review Roll) -->
-        <section class="py-12 bg-slate-50 extreme-round px-6 md:px-10 overflow-hidden mb-12">
+        <section class="py-12 bg-slate-50 rounded-5xl px-6 md:px-10 overflow-hidden mb-12">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
                     <span class="text-brand-orange font-black text-xs uppercase tracking-widest block mb-1">Guest Journal</span>
@@ -211,7 +264,7 @@
     <!-- Automation Controller & Data Hydration Scripts -->
     <script>
         // Internal Context State Configuration
-        let currentLang = 'en'; // Force English template by default for international travelers
+        let currentLang = 'en';
         let cart = [];
         const WA_NUMBER = "6285722229807";
 
@@ -286,7 +339,7 @@
                 ? `<span class="text-brand-orange font-black">ID</span> / EN` 
                 : `ID / <span class="text-brand-orange font-black">EN</span>`;
 
-            // Setup Catalog Sections Rendering utilizing extreme rounded frames
+            // Setup Catalog Sections
             const container = document.getElementById('productContainer');
             container.innerHTML = '';
             
@@ -304,7 +357,6 @@
                 const section = document.createElement('div');
                 section.className = "space-y-6";
                 
-                // Structured Grid layout representing high-depth custom blocks from reference image
                 section.innerHTML = `
                     <div class="flex items-center gap-4">
                         <span class="w-3 h-6 bg-brand-orange rounded-full inline-block"></span>
@@ -367,7 +419,6 @@
             const container = document.getElementById('cartItemsContainer');
             const totalEl = document.getElementById('cartTotalRp');
 
-            // Badge Counter Updating
             badge.innerText = cart.length;
             if (cart.length > 0) {
                 badge.classList.remove('opacity-0');
@@ -407,14 +458,13 @@
             totalEl.innerText = formatRp(total);
         }
 
-        // Redirect Engine targeting WhatsApp Web/API Endpoint (Formatted strictly in English per rules)
+        // WhatsApp Redirect
         document.getElementById('checkoutBtn').addEventListener('click', () => {
             if (cart.length === 0) return;
             
             let text = `Hello Mank Dede! I would like to book the following packages from the website:\n\n`;
             
             cart.forEach((item, i) => {
-                // Ensure text output defaults cleanly to English details as per consumer base preferences
                 text += `${i+1}. ${item.titleEn} - ${formatRp(item.price)}\n`;
             });
 
